@@ -127,7 +127,7 @@ async function actualizar() {
     }
   }
 
-  function ObtenerJson() {
+  function ObtenerOpciones() {
     try {
       const jsonText = document.getElementById('jsonOpciones').value.trim();
       if (jsonText) {
