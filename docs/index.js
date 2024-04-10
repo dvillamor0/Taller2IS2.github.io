@@ -95,6 +95,56 @@ async function actualizar() {
     }
   }
 
+  function mostrarDatos(datos) {
+    const divDatos = document.getElementById("datos");
+    divDatos.innerHTML = ""; // Limpiar el contenido previo
+  
+    if (Array.isArray(datos)) {
+      const tabla = crearTablaHeader(); // Crea el encabezado de la tabla
+      datos.forEach(entidad => {
+        const fila = crearFilaTabla(entidad);
+        tabla.appendChild(fila);
+      });
+      divDatos.appendChild(tabla);
+    } else {
+      const tabla = crearTablaHeader();
+      const fila = crearFilaTabla(datos);
+      tabla.appendChild(fila);
+      divDatos.appendChild(tabla);
+    }
+  }
+  
+  function crearTablaHeader() {
+    const tabla = document.createElement("table");
+    const thead = document.createElement("thead");
+    const filaHeader = document.createElement("tr");
+    
+    const clavesEntidad = Object.keys(datos[0] || {});
+  
+    clavesEntidad.forEach(clave => {
+      const th = document.createElement("th");
+      th.textContent = clave;
+      filaHeader.appendChild(th);
+    });
+  
+    thead.appendChild(filaHeader);
+    tabla.appendChild(thead);
+    return tabla;
+  }
+  
+  function crearFilaTabla(entidad) {
+    const fila = document.createElement("tr");
+    const clavesEntidad = Object.keys(entidad);
+  
+    clavesEntidad.forEach(clave => {
+      const td = document.createElement("td");
+      td.textContent = entidad[clave];
+      fila.appendChild(td);
+    });
+  
+    return fila;
+  }
+
   function ObtenerJson() {
     try {
       const jsonText = document.getElementById('jsonEntidad').value.trim();
