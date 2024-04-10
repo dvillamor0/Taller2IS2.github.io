@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Entidades</title>
+
+</head>
+
+<body>
+    <h1>Menú de CRUD</h1>
+
+    <div class="botones-entidades">
+        <button id="btn-persona">Persona</button>
+        <button id="btn-departamento">Departamento</button>
+        <button id="btn-municipio">Municipio</button>
+        <button id="btn-vivienda">Vivienda</button>
+        <button id="btn-vivienda-propietario">Vivienda-propietario</button>
+    </div>
+
+    <div id="datos"></div>
+
+    <div id="formularios-crud">
+        <textarea id="jsonEntidad" name="jsonEntidad"></textarea>
+        <br>
+        <select id="filterSelect" name="filter">
+            <option value="" selected>None</option>
+            <option value="eq">Equal to</option>
+            <option value="gt">Greater than</option>
+            <option value="lt">Less than</option>
+            <option value="gte">Greater than or equal to</option>
+            <option value="lte">Less than or equal to</option>
+            <option value="like">Like (Case-Sensitive)</option>
+            <option value="ilike">ILike (Case-Insensitive)</option>
+            <option value="is">Is Null</option>
+            <option value="in">In Array</option>
+            <option value="neq">Not equal to</option>
+        </select>
+        <br>
+        <textarea id="jsonOpciones" name="jsonOpciones"></textarea>
+        <br>
+        <button id="btn-crear">Crear</button>
+        <button id="btn-leer">Leer</button>
+        <button id="btn-actualizar">Actualizar</button>
+        <button id="btn-eliminar">Eliminar</button>
+    </div>
+</body>
+</html>
