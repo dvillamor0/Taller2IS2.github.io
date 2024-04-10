@@ -1,5 +1,5 @@
 const DataBaseUrl = "https://wljlghncphcbvilwisbe.supabase.co/rest"
-const apiKey = window.prompt("");
+const apiKey = window.prompt("supabase apiKey:");
 const supabase = new DataBaseCrud(DataBaseUrl, apiKey);
 let entidad = null;
 
