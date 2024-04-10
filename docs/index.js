@@ -1,5 +1,3 @@
-const DataBaseCrud = require('./DataBaseCRUD');
-
 const DataBaseUrl = "https://wljlghncphcbvilwisbe.supabase.co/rest"
 const apiKey = window.prompt("");
 const supabase = new DataBaseCrud(DataBaseUrl, apiKey);
