@@ -1,8 +1,8 @@
-import DataBaseCrud from './DataBaseCRUD.js';
+import { DataBaseCRUD } from './DataBaseCRUD.js';
 
 const DataBaseUrl = "https://wljlghncphcbvilwisbe.supabase.co/rest"
 const apiKey = window.prompt("supabase apiKey:");
-const supabase = new DataBaseCrud(DataBaseUrl, apiKey);
+const supabase = new DataBaseCRUD(DataBaseUrl, apiKey);
 let entidad = null;
 
 document.getElementById('btn-persona').addEventListener('click', usarPersona);
