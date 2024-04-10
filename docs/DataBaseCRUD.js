@@ -1,4 +1,4 @@
-class DataBaseCRUD{
+export class DataBaseCRUD{
     constructor(supabaseUrl, apiKey) {
       this.supabaseUrl = supabaseUrl;
       this.apiKey = apiKey;
