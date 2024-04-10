@@ -1,4 +1,4 @@
-import DataBaseCrud from './DataBaseCrud.js';
+import DataBaseCrud from './DataBaseCRUD.js';
 
 const DataBaseUrl = "https://wljlghncphcbvilwisbe.supabase.co/rest"
 const apiKey = window.prompt("supabase apiKey:");
