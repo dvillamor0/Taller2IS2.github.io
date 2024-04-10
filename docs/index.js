@@ -11,24 +11,33 @@ document.getElementById('btn-municipio').addEventListener('click', usarMunicipio
 document.getElementById('btn-vivienda').addEventListener('click', usarVivienda);
 document.getElementById('btn-vivienda-propietario').addEventListener('click', usarViviendaPropietario);
 
+function actualizarEntidadDiv() {
+    document.getElementById('entidadDiv').innerText = "Entidad: " + entidad;
+}
+
 function usarPersona() {
     entidad = "persona";
+    actualizarEntidadDiv();
 }
 
 function usarDepartamento() {
     entidad = "departamento";
+    actualizarEntidadDiv();
 }
 
 function usarMunicipio() {
     entidad = "municipio";
+    actualizarEntidadDiv();
 }
 
 function usarVivienda() {
     entidad = "vivienda";
+    actualizarEntidadDiv();
 }
 
 function usarViviendaPropietario() {
     entidad = "vivienda_propietario";
+    actualizarEntidadDiv();
 }
 
 const btnCrear = document.getElementById('btn-crear');
