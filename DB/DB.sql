@@ -50,7 +50,7 @@ ADD COLUMN id_gobernador INT NOT NULL REFERENCES Persona(id_persona);
 CREATE TABLE Vivienda_Propietario (
     id_vivienda INT NOT NULL,
     id_persona INT NOT NULL,
-    porcentaje_propiedad DECIMAL(2,1) NOT NULL CHECK (porcentaje_propiedad >= 0 AND porcentaje_propiedad <= 100),
+    porcentaje_propiedad SMALLINT NOT NULL CHECK (porcentaje_propiedad >= 0 AND porcentaje_propiedad <= 100),
     PRIMARY KEY (id_vivienda, id_persona),
     FOREIGN KEY (id_vivienda) REFERENCES Vivienda(id_vivienda),
     FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)

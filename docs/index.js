@@ -13,7 +13,36 @@ document.getElementById('btn-vivienda-propietario').addEventListener('click', us
 
 function actualizarEntidadDiv() {
     document.getElementById('entidadDiv').innerText = "Entidad: " + entidad;
+    const entidadTemplateDiv = document.getElementById('entidadTemplate');
+    
+    let entidadTemplate = "";
+    switch (entidad) {
+        case 'departamento':
+          entidadTemplate = '{"id_departamento": id, "nombre_departamento": "nombre", "id_gobernador": idGobernador}';          
+          break;
+        case 'municipio':
+            entidadTemplate = '{"id_municipio": id, "nombre_municipio": "nombre", "id_departamento": idDepartamento}';
+            break;
+        case 'vivienda':
+            entidadTemplate = '{"id_vivienda": id, "direccion": "direccion", "id_municipio": idMunicipio}';
+            break;
+        case 'tipoDocumento':
+            entidadTemplate = '{"id_tipo_documento": id, "nombre_tipo_documento": "nombre"}';
+          break;
+        case 'persona':
+            entidadTemplate = '{"id_persona": id, "id_tipo_documento": idTipoDocumento, "dni": "dni", "nombre1": "nombre1", "nombre2": "nombre2", "apellido1": "apellido1", "apellido2": "apellido2", "id_cabeza_familia": idJefeFamilia, "id_recidencia": idVivienda}';
+          break;
+        case 'vivienda_propietario':
+            entidadTemplate = '{"id_vivienda": idVivienda, "id_persona": idPersona, "porcentaje_propiedad": porcentajePropiedad}';
+          break;
+        default:
+          entidadTemplateDiv.innerHTML = 'Entidad no reconocida';
+    }
+
+    entidadTemplateDiv.innerText = entidadTemplate;
 }
+
+
 
 function usarPersona() {
     entidad = "persona";
@@ -51,21 +80,28 @@ btnActualizar.addEventListener('click', actualizar);
 btnEliminar.addEventListener('click', eliminar);
 
 async function crear() {
+    if (!entidad) {
+        window.alert("Seleccione una entidad");
+        return;
+    }
     const Objetojson = ObtenerJson();
     try {
       const created = await supabase.insert(entidad, Objetojson);
-      console.log(entidad+' creada:', created);
+      console.log(entidad+' creado:', created);
       mostrarDatos(created);
     } catch (error) {
       console.error('Error al crear '+entidad+':', error);
     }
   }
   async function leer() {
+    if (!entidad) {
+        window.alert("Seleccione una entidad");
+        return;
+    }
     const filter = ObtenerFiltro();
-    const options = ObtenerOpciones();
     try {
-      const entidades = await supabase.read(entidad, '*', filter, options);
-      console.log(entidad+' leídas:', entidades);
+      const entidades = await supabase.read(entidad, '*', filter);
+      console.log(entidad+' leídos:', entidades);
       mostrarDatos(entidades);
       return entidades;
     } catch (error) {
@@ -73,26 +109,35 @@ async function crear() {
     }
 }
 async function actualizar() {
+    if (!entidad) {
+        window.alert("Seleccione una entidad");
+        return;
+    }
     const Objetojson = ObtenerJson();
+    const filter = ObtenerFiltro();
     try {
-      const updated = await supabase.update(entidad, Objetojson.id, Objetojson);
-      console.log(entidad+' actualizada:', updated);
+      const updated = await supabase.update(entidad, filter, Objetojson);
+      console.log(entidad+' actualizado:', updated);
       mostrarDatos(updated);
     } catch (error) {
       console.error('Error al actualizar '+entidad+':', error);
     }
   }
-  async function eliminar() {  
+  async function eliminar() {
+    if (!entidad) {
+        window.alert("Seleccione una entidad");
+        return;
+    }  
     const eliminar = window.confirm("Desea eliminar "+entidad+"?");
-        if (eliminar) {
-            const Objetojson = ObtenerJson();
-        try {
-        await supabase.delete(entidad, Objetojson.id);
-        window.alert(entidad+' eliminada: '+ Objetojson.id);
-        } catch (error) {
-        console.error('Error al eliminar'+entidad+':', error);
-        }   
-    }
+      if (eliminar) {
+          const filter = ObtenerFiltro();
+          try {
+              await supabase.delete(entidad, filter);
+              window.alert(entidad + ' eliminado con criterios: ' + JSON.stringify(filter));
+          } catch (error) {
+              console.error('Error al eliminar' + entidad + ':', error);
+          }
+      }
   }
 
   function mostrarDatos(datos) {
@@ -100,26 +145,30 @@ async function actualizar() {
     divDatos.innerHTML = ""; // Limpiar el contenido previo
   
     if (Array.isArray(datos)) {
-      const tabla = crearTablaHeader(); // Crea el encabezado de la tabla
+      const tabla = crearTablaHeader(datos[0]);
       datos.forEach(entidad => {
         const fila = crearFilaTabla(entidad);
-        tabla.appendChild(fila);
+        tabla[1].appendChild(fila);
       });
-      divDatos.appendChild(tabla);
+      divDatos.appendChild(tabla[0]);
     } else {
-      const tabla = crearTablaHeader();
+      const tabla = crearTablaHeader(datos);
       const fila = crearFilaTabla(datos);
-      tabla.appendChild(fila);
-      divDatos.appendChild(tabla);
+      tabla[1].appendChild(fila);
+      divDatos.appendChild(tabla[0]);
     }
   }
   
-  function crearTablaHeader() {
+  function crearTablaHeader(dato) {
     const tabla = document.createElement("table");
     const thead = document.createElement("thead");
+    
+    tabla.classList.add("table", "table-striped","table-bordered");
+    thead.classList.add("thead-dark");
+    
     const filaHeader = document.createElement("tr");
     
-    const clavesEntidad = Object.keys(datos[0] || {});
+    const clavesEntidad = Object.keys(dato || {});
   
     clavesEntidad.forEach(clave => {
       const th = document.createElement("th");
@@ -129,7 +178,10 @@ async function actualizar() {
   
     thead.appendChild(filaHeader);
     tabla.appendChild(thead);
-    return tabla;
+    
+    const tbody = document.createElement("tbody");
+    tabla.appendChild(tbody);
+    return [tabla,tbody];
   }
   
   function crearFilaTabla(entidad) {
@@ -167,27 +219,14 @@ async function actualizar() {
     if (filterType !== '' && filterValue) {
       try {
         const filterObj = JSON.parse(filterValue);
-        return { [filterType]: filterObj };
+        const filtro = { [filterType]: filterObj };
+        return filtro;
       } catch (error) {
         console.error('Error parsing filter options:', error);
         throw error;
       }
     } else {
       return {};
-    }
-  }
-
-  function ObtenerOpciones() {
-    try {
-      const jsonText = document.getElementById('jsonOpciones').value.trim();
-      if (jsonText) {
-        return JSON.parse(jsonText);
-      } else {
-        throw new Error('Please enter JSON data in the text area for options.');
-      }
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-      throw error;
     }
   }
   
