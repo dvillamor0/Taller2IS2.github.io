@@ -35,6 +35,7 @@ CREATE TABLE Persona (
     nombre2 VARCHAR(128),
     apellido1 VARCHAR(64) NOT NULL,
     apellido2 VARCHAR(128),
+    mayor_de_edad BOOL NOT NULL,
     id_cabeza_familia INT,
     id_recidencia INT NOT NULL,
     FOREIGN KEY (id_tipo_documento) REFERENCES TipoDocumento(id_tipo_documento),
@@ -42,9 +43,19 @@ CREATE TABLE Persona (
     FOREIGN KEY (id_recidencia) REFERENCES Vivienda(id_vivienda)
 );
 
+--Solo los mayores de edad pueden tener C.C
+ALTER TABLE Persona
+ADD CONSTRAINT chk_tipo_documento_mayor_de_edad
+CHECK (
+    (id_tipo_documento = 1 AND mayor_de_edad = TRUE)
+);
+
 -- Añade el Gobernador
 ALTER TABLE Departamento
-ADD COLUMN id_gobernador INT NOT NULL REFERENCES Persona(id_persona);
+ADD COLUMN id_gobernador INT REFERENCES Persona(id_persona);
+-- Añadir restricción UNIQUE para asegurar que una persona no pueda gobernar varios departamentos
+ALTER TABLE Departamento
+ADD CONSTRAINT unique_gobernador UNIQUE (id_gobernador);
 
 -- Crear la tabla Vivienda_Propietario
 CREATE TABLE Vivienda_Propietario (
@@ -55,3 +66,42 @@ CREATE TABLE Vivienda_Propietario (
     FOREIGN KEY (id_vivienda) REFERENCES Vivienda(id_vivienda),
     FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
 );
+
+-- Agregar restricción CHECK para asegurar que el gobernador tenga id_tipo_documento igual a C.C
+ALTER TABLE Persona
+ADD CONSTRAINT chk_gobernador_tipo_documento CHECK (id_tipo_documento = 1);
+
+-- Agregar restricción CHECK para asegurar que el cabeza de familia sea mayor de edad
+ALTER TABLE Persona
+ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad CHECK (mayor_de_edad = TRUE);
+
+-- Agregar la restricción para que un gobernador tenga en el municipio del departamento gobernado
+CREATE OR REPLACE FUNCTION validate_gobernador_residence()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.gobernadorId IS NOT NULL THEN
+        SELECT INTO NEW.departamentoId d.id
+        FROM Persona p
+        JOIN Vivienda v ON v.id = p.id_recidencia
+        JOIN Municipio m ON m.id = v.id_municipio
+        JOIN Departamento d ON d.id = m.id_departamento
+        WHERE p.id = NEW.gobernadorId;
+
+        IF NEW.departamentoId IS NULL THEN
+            RAISE EXCEPTION 'El gobernador debe residir en el municipio del departamento que gobierna.';
+        END IF;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER validate_gobernador_residence_before_update
+BEFORE UPDATE ON Departamento
+FOR EACH ROW
+EXECUTE PROCEDURE validate_gobernador_residence();
+
+CREATE TRIGGER validate_gobernador_residence_before_insert
+BEFORE INSERT ON Departamento
+FOR EACH ROW
+EXECUTE PROCEDURE validate_gobernador_residence();
