@@ -53,6 +53,7 @@ CHECK (
 -- Añade el Gobernador
 ALTER TABLE Departamento
 ADD COLUMN id_gobernador INT REFERENCES Persona(id_persona);
+
 -- Añadir restricción UNIQUE para asegurar que una persona no pueda gobernar varios departamentos
 ALTER TABLE Departamento
 ADD CONSTRAINT unique_gobernador UNIQUE (id_gobernador);
@@ -79,16 +80,16 @@ ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad CHECK (mayor_de_edad = TRUE);
 CREATE OR REPLACE FUNCTION validate_gobernador_residence()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.gobernadorId IS NOT NULL THEN
-        SELECT INTO NEW.departamentoId d.id
+    IF NEW.id_gobernador IS NOT NULL THEN
+        SELECT d.id_departamento INTO NEW.id_departamento_gobernador
         FROM Persona p
-        JOIN Vivienda v ON v.id = p.id_recidencia
-        JOIN Municipio m ON m.id = v.id_municipio
-        JOIN Departamento d ON d.id = m.id_departamento
-        WHERE p.id = NEW.gobernadorId;
+        JOIN Vivienda v ON v.id_vivienda = p.id_recidencia
+        JOIN Municipio m ON m.id_municipio = v.id_municipio
+        JOIN Departamento d ON d.id_departamento = m.id_departamento
+        WHERE p.id = NEW.id_gobernador;
 
-        IF NEW.departamentoId IS NULL THEN
-            RAISE EXCEPTION 'El gobernador debe residir en el municipio del departamento que gobierna.';
+        IF NEW.id_departamento <> NEW.id_departamento_gobernador THEN
+            RAISE EXCEPTION 'El gobernador no reside en el municipio del departamento que gobierna.';
         END IF;
     END IF;
 
