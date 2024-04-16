@@ -40,7 +40,7 @@ function ObtenerFiltro() {
 
     if (nombre_departamento_filter !== "") {
         const filtro = {};
-        filtro[nombre_departamento_filter] = nombre_departamento.value;
+        filtro[nombre_departamento_filter] = "%"+nombre_departamento.value+"%";
         campo.nombre_departamento = filtro;
     }
 
