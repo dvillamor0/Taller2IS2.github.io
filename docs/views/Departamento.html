@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Departamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <script type="module" src="./scripts/departamentoScript.js"></script>
+    <div class="container mt-5">
+        <h2>CRUD Departamento</h2>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group">
+                    <a href="../index.html" id="btn-home" class="btn btn-primary">HOME</a>
+                    <a href="./Persona.html" id="btn-persona" class="btn btn-primary">Persona</a>
+                    <a href="./Departamento.html" id="btn-departamento" class="btn btn-primary">Departamento</a>
+                    <a href="./Municipio.html" id="btn-municipio" class="btn btn-primary">Municipio</a>
+                    <a href="./Vivienda.html" id="btn-vivienda" class="btn btn-primary">Vivienda</a>
+                    <a href="./Vivienda-propietario.html" id="btn-vivienda-propietario" class="btn btn-primary">Vivienda-propietario</a>
+                </div>
+            </div>
+        </div>
+        <br>
+        <form id="departamentoForm">
+            <div class="form-group row">
+                <label for="id_departamento" class="col-sm-2 col-form-label">ID Departamento:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="id_departamento_filtro" name="id_departamento"
+                        placeholder="ID Departamento filtro">
+                    <input type="text" class="form-control" id="id_departamento" name="id_departamento"
+                        placeholder="ID Departamento nuevo">
+                </div>
+                <div class="col-sm-2">
+                    <select id="id_departamento_filter" name="id_departamento_filter" class="form-control">
+                        <option value="" selected>Ninguno</option>
+                        <option value="eq">Igual a</option>
+                        <option value="gt">Mayor que</option>
+                        <option value="lt">Menor que</option>
+                        <option value="gte">Mayor o igual que</option>
+                        <option value="lte">Menor o igual que</option>
+                        <option value="like">Contener (Mayúsculas y minúsculas sensibles)</option>
+                        <option value="ilike">Contener (Mayúsculas y minúsculas no sensibles)</option>
+                        <option value="is">Es nulo</option>
+                        <option value="in">En arreglo</option>
+                        <option value="neq">No es igual a</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="nombre_departamento" class="col-sm-2 col-form-label">Nombre Departamento:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento_filtro"
+                        placeholder="Nombre Departamento filtro">
+                    <input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento"
+                        placeholder="Nombre Departamento nuevo">
+                </div>
+                <div class="col-sm-2">
+                    <select id="nombre_departamento_filter" name="nombre_departamento_filter" class="form-control">
+                        <option value="" selected>Ninguno</option>
+                        <option value="eq">Igual a</option>
+                        <option value="gt">Mayor que</option>
+                        <option value="lt">Menor que</option>
+                        <option value="gte">Mayor o igual que</option>
+                        <option value="lte">Menor o igual que</option>
+                        <option value="like">Contener (Mayúsculas y minúsculas sensibles)</option>
+                        <option value="ilike">Contener (Mayúsculas y minúsculas no sensibles)</option>
+                        <option value="is">Es nulo</option>
+                        <option value="in">En arreglo</option>
+                        <option value="neq">No es igual a</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="id_gobernador" class="col-sm-2 col-form-label">ID Gobernador:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="id_gobernador_filtro" name="id_gobernador"
+                        placeholder="ID Gobernador filtro">
+                    <input type="text" class="form-control" id="id_gobernador" name="id_gobernador"
+                        placeholder="ID Gobernador nuevo">
+                </div>
+                <div class="col-sm-2">
+                    <select id="id_gobernador_filter" name="id_gobernador_filter" class="form-control">
+                        <option value="" selected>Ninguno</option>
+                        <option value="eq">Igual a</option>
+                        <option value="gt">Mayor que</option>
+                        <option value="lt">Menor que</option>
+                        <option value="gte">Mayor o igual que</option>
+                        <option value="lte">Menor o igual que</option>
+                        <option value="like">Contener (Mayúsculas y minúsculas sensibles)</option>
+                        <option value="ilike">Contener (Mayúsculas y minúsculas no sensibles)</option>
+                        <option value="is">Es nulo</option>
+                        <option value="in">En arreglo</option>
+                        <option value="neq">No es igual a</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        
+
+        <br>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" id="crearBtn" class="btn btn-primary">Crear</button>
+                    <button type="submit" id="leerBtn" class="btn btn-success">Leer</button>
+                    <button type="submit" id="actualizarBtn" class="btn btn-warning">Actualizar</button>
+                    <button type="submit" id="eliminarBtn" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+
+        <div id="datos" class="mt-3">  </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="module" src="../DataBaseCRUD.js"></script>
+    <script type="module" src="../index.js"></script>
+    <script type="module" src="../src/Entidad.js"></script>
+</body>
+
+</html>

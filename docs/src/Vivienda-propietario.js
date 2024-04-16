@@ -1,15 +1,17 @@
-import { Entidad } from "./Entidad";
+import { Entidad } from "./Entidad.js";
 
-export class ViviendaPropietario extends Entidad{
+export class ViviendaPropietario {
 
   constructor(idVivienda,idPersona,porcentajePropiedad){
-    this._entidad = "vivienda_propietario";
 
     this.id_vivienda = idVivienda;
     this.id_persona = idPersona;
     this.porcentaje_propiedad = porcentajePropiedad;
-    
   }
 }
 
-const vivienda = new ViviendaPropietario(1,1,100);
+export class ViviendaPropietarioController extends Entidad {
+  constructor(objeto = null) {
+      super(objeto,"vivienda_propietario");
+  }
+}

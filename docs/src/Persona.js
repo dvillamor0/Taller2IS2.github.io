@@ -1,9 +1,7 @@
-import { Entidad } from "./Entidad";
+import { Entidad } from "./Entidad.js";
+export class Persona {
 
-export class Persona extends Entidad{
-
-  constructor(id,idTipoDocumento,dni,nombre1,apellido1,idVivienda,mayor_de_edad,nombre2=null,apellido2=null,idJefeFamilia=null){
-    this._entidad = "persona";
+  constructor(idTipoDocumento, dni, nombre1, apellido1, idVivienda, mayor_de_edad, nombre2 = null, apellido2 = null, idJefeFamilia = null, id = null) {
 
     this.id_persona = id;
     this.id_tipo_documento = idTipoDocumento;
@@ -15,6 +13,18 @@ export class Persona extends Entidad{
     this.mayor_de_edad = mayor_de_edad;
     this.id_cabeza_familia = idJefeFamilia;
     this.id_recidencia = idVivienda;
-    
+
+    if (this.id_tipo_documento === 1 && !this.mayor_de_edad) {
+      throw new Error("La persona debe ser mayor de edad para tener C.C.");
+    }
+    if (this.id_cabeza_familia !== null && !this.mayor_de_edad) {
+      throw new Error("El cabeza de familia debe ser mayor de edad.");
+    }
+  }
+}
+
+export class PersonaController extends Entidad {
+  constructor(objeto = null) {
+    super(objeto,"persona");
   }
 }

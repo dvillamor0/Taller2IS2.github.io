@@ -14,62 +14,34 @@
     <div class="container">  <h1>Menú de CRUD <div id="entidadDiv"></div></h1>
 
         <div class="row">  <div class="col-md-12">  <div class="btn-group">
-                    <button id="btn-persona" class="btn btn-primary">Persona</button>
-                    <button id="btn-departamento" class="btn btn-primary">Departamento</button>
-                    <button id="btn-municipio" class="btn btn-primary">Municipio</button>
-                    <button id="btn-vivienda" class="btn btn-primary">Vivienda</button>
-                    <button id="btn-vivienda-propietario" class="btn btn-primary">Vivienda-propietario</button>
+                    <a href="./views/Persona.html" id="btn-persona" class="btn btn-primary">Persona</a>
+                    <a href="./views/Departamento.html" id="btn-departamento" class="btn btn-primary">Departamento</a>
+                    <a href="./views/Municipio.html" id="btn-municipio" class="btn btn-primary">Municipio</a>
+                    <a href="./views/Vivienda.html" id="btn-vivienda" class="btn btn-primary">Vivienda</a>
+                    <a href="./views/Vivienda-propietario.html" id="btn-vivienda-propietario" class="btn btn-primary">Vivienda-propietario</a>
                 </div>
             </div>
         </div>
-
         <br>
-        <label><strong>JSON de la entidad seleccionada:</strong> </label>
-        <div id="entidadTemplate"></div>
-        <br>
-
-        <div id="formularios-crud" class="mt-3">  <div class="row">
-                <div class="col-md-6">
-                    <label>JSON de la entidad</label>
-                    <textarea id="jsonEntidad" name="jsonEntidad" class="form-control" placeholder="Ingrese JSON de la entidad"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <label>filtro</label>
-                    <select id="filterSelect" name="filter" class="form-control">
-                        <option value="" selected>Ninguno</option>
-                        <option value="eq">Igual a</option>
-                        <option value="gt">Mayor que</option>
-                        <option value="lt">Menor que</option>
-                        <option value="gte">Mayor o igual que</option>
-                        <option value="lte">Menor o igual que</option>
-                        <option value="like">Contener (Mayúsculas y minúsculas sensibles)</option>
-                        <option value="ilike">Contener (Mayúsculas y minúsculas no sensibles)</option>
-                        <option value="is">Es nulo</option>
-                        <option value="in">En arreglo</option>
-                        <option value="neq">No es igual a</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <label>JSON de opciones</label>
-                    <textarea id="jsonOpciones" name="jsonOpciones" class="form-control" placeholder="Ingrese JSON de opciones de filtro"></textarea>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <button id="btn-crear" class="btn btn-success">Crear</button>
-                    <button id="btn-leer" class="btn btn-info">Leer</button>
-                    <button id="btn-actualizar" class="btn btn-warning">Actualizar</button>
-                    <button id="btn-eliminar" class="btn btn-danger">Eliminar</button>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <label>Api Key</label>
+            <textarea id="apiKey" name="Api Key" class="form-control" rows="10" placeholder="Ingrese la llave del api"></textarea>
+            <br>
+            <button type="submit" class="btn btn-success" id="GuardarLlave">Guardar Llave</button>
         </div>
-        <div id="datos" class="mt-3">  </div>
     </div>  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="DataBaseCRUD.js"></script>
     <script type="module" src="index.js"></script>
+    <script>
+        document.getElementById("GuardarLlave").addEventListener('click', guardarContenido);
+
+        function guardarContenido() {
+        var contenido = document.getElementById("apiKey").value;
+        localStorage.setItem("apiKey", contenido);
+        window.alert("llave guardada con exito");
+        }
+    </script>
 </body>
 </html>

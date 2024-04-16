@@ -1,13 +1,17 @@
-import { Entidad } from "./Entidad";
+import { Entidad } from "./Entidad.js";
 
-export class Vivienda extends Entidad{
+export class Vivienda {
 
   constructor(id,direccion,idMunicipio){
-    this._entidad = "vivienda";
 
     this.id_vivienda= id;
     this.direccion=direccion;
     this.id_municipio=idMunicipio;
-    
+  }
+}
+
+export class ViviendaController extends Entidad {
+  constructor(objeto = null) {
+      super(objeto,"vivienda");
   }
 }

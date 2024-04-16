@@ -1,4 +1,16 @@
+const DataBaseUrl = "https://wljlghncphcbvilwisbe.supabase.co/rest";
+
 export class DataBaseCRUD{
+
+    static instancia = null;
+
+    static getInstancia(apiKey){
+      if (DataBaseCRUD.instancia == null) {
+        DataBaseCRUD.instancia = new DataBaseCRUD(DataBaseUrl, apiKey);
+      }
+      return DataBaseCRUD.instancia;
+    }
+
     constructor(supabaseUrl, apiKey) {
       this.supabaseUrl = supabaseUrl;
       this.apiKey = apiKey;
@@ -10,8 +22,8 @@ export class DataBaseCRUD{
       Object.entries(filter).map(([key, value]) => {
         const filterType = Object.keys(value)[0];
         const filterValue = value[filterType];
-        const filtro = `${key}.${filterValue}`;
-        url.searchParams.set(filterType, filtro);
+        const filtro = `${filterType}.${filterValue}`;
+        url.searchParams.set(key, filtro);
       });
       url.searchParams.set('select', select);
 
@@ -45,8 +57,8 @@ export class DataBaseCRUD{
       Object.entries(filter).map(([key, value]) => {
         const filterType = Object.keys(value)[0];
         const filterValue = value[filterType];
-        const filtro = `${key}.${filterValue}`;
-        url.searchParams.set(filterType, filtro);
+        const filtro = `${filterType}.${filterValue}`;
+        url.searchParams.set(key, filtro);
       });
     
       const headers = {
@@ -71,8 +83,8 @@ export class DataBaseCRUD{
       Object.entries(filter).map(([key, value]) => {
         const filterType = Object.keys(value)[0];
         const filterValue = value[filterType];
-        const filtro = `${key}.${filterValue}`;
-        url.searchParams.set(filterType, filtro);
+        const filtro = `${filterType}.${filterValue}`;
+        url.searchParams.set(key, filtro);
       });
   
       const headers = {
