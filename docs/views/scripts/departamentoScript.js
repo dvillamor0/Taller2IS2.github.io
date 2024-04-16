@@ -69,7 +69,7 @@ async function actualizar() {
     const departamento = ObtenerNuevo();
     const filtro = ObtenerFiltro();
     const departamentoCtrl = new DepartamentoController(departamento);
-    mostrarDatos(await departamento.actualizar(filtro));
+    mostrarDatos(await departamentoCtrl.actualizar(filtro));
 }
 
 function eliminar() {
