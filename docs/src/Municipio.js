@@ -1,7 +1,7 @@
 import { Entidad } from "./Entidad.js";
 export class Municipio {
 
-  constructor(id,nombre,idDepartamento){
+  constructor(nombre,idDepartamento,id=null){
 
     this.id_municipio= id;
     this.nombre_municipio = nombre;
