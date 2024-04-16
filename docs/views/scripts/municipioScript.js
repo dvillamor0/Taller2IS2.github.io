@@ -1,6 +1,6 @@
 
 import { Municipio, MunicipioController } from "../../src/Municipio.js";
-import { DepartamentoController } from "../src/Departamento.js";
+import { DepartamentoController } from "../../src/Departamento.js";
 import { mostrarDatos } from "../../index.js";
 import { botonesCRUD } from "./base.js";
 
