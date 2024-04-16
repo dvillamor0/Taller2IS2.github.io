@@ -53,19 +53,19 @@ function ObtenerFiltro() {
     if (id_municipio_filter !== "") {
         const filtro = {};
         filtro[id_municipio_filter] = id_municipio.value;
-        campo[id_municipio.tagName] = filtro;
+        campo.id_municipio = filtro;
     }
 
     if (nombre_municipio_filter !== "") {
         const filtro = {};
-        filtro[nombre_municipio_filter] = nombre_municipio.value;
-        campo[nombre_municipio.tagName] = filtro;
+        filtro[nombre_municipio_filter] = "%"+nombre_municipio.value+"%";
+        campo.nombre_municipio = filtro;
     }
 
     if (id_departamento_filter !== "") {
         const filtro = {};
         filtro[id_departamento_filter] = id_departamento.value;
-        campo[id_departamento.tagName] = filtro;
+        campo.id_departamento = filtro;
     }
 
     return campo;
