@@ -1,6 +1,6 @@
 
 import { Municipio, MunicipioController } from "../../src/Municipio.js";
-import { DepartamentoController } from "../src/Departamento.js";
+import { DepartamentoController } from "../../src/Departamento.js";
 import { mostrarDatos } from "../../index.js";
 import { botonesCRUD } from "./base.js";
 
@@ -42,7 +42,7 @@ function ObtenerNuevo() {
 function ObtenerFiltro() {
     const id_municipio_filter = document.getElementById('id_municipio_filter').value;
     const nombre_municipio_filter = document.getElementById('nombre_municipio_filter').value;
-    const id_departamento_filter = document.getElementById('id_departamento_filter').value;
+    const id_departamento_filter = "eq"
 
     const id_municipio = document.getElementById('id_municipio_filtro');
     const nombre_municipio = document.getElementById('nombre_municipio_filtro');

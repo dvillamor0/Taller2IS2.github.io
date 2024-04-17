@@ -2,7 +2,7 @@ import { Entidad } from "./Entidad.js";
 
 export class Vivienda {
 
-  constructor(id,direccion,idMunicipio){
+  constructor(id=null,direccion,idMunicipio){
 
     this.id_vivienda= id;
     this.direccion=direccion;
