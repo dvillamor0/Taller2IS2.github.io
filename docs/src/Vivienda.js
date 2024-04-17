@@ -4,7 +4,7 @@ export class Vivienda {
 
   constructor(id,direccion,idMunicipio){
 
-    this.id_vivienda= id;
+    this.id_vivienda=id;
     this.direccion=direccion;
     this.id_municipio=idMunicipio;
   }

@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 id_municipio.addEventListener('focus', async () => {
     const municipioCtrl = new MunicipioController();
-    const filtro = ObtenerFiltro()
+    const filtro = ObtenerMunicipios()
     const municipios = await municipioCtrl.leer(filtro);
     const selectMunicipio = document.getElementById('id_municipio');
 
@@ -42,10 +42,9 @@ id_departamento.addEventListener('change', function(){
 function ObtenerNuevo() {
     const id_vivienda = document.getElementById('id_vivienda').value;
     const direccion = document.getElementById('direccion').value;
-    const id_departamento = document.getElementById('id_departamento').value;
     const id_municipio = document.getElementById('id_municipio').value;
 
-    if (id_vivienda && id_vivienda && id_departamento && id_municipio) {
+    if (id_vivienda && id_vivienda && id_municipio) {
         return new Vivienda(id_vivienda, direccion, id_municipio);
     } else {
         window.alert("Llene todos los campos");
@@ -56,32 +55,44 @@ function ObtenerNuevo() {
 function ObtenerFiltro() {
     const id_vivienda_filter = document.getElementById('id_vivienda_filter').value;
     const direccion_filter = document.getElementById('direccion_filter').value;
-    const id_departamento_filter = "eq"
+    const id_municipio_filter = "eq"
 
     const id_vivienda = document.getElementById('id_vivienda_filtro');
     const direccion = document.getElementById('direccion_filtro');
-    const id_departamento = document.getElementById('id_departamento');
-
+    const id_municipio = document.getElementById('id_municipio');
 
     const campo = {};
 
     if (id_vivienda_filter !== "") {
         const filtro = {};
         filtro[id_vivienda_filter] = id_vivienda.value;
-        console.log("vivienda: ", filtro);
         campo.id_vivienda = filtro;
     }
 
     if (direccion_filter !== "") {
         const filtro = {};
         filtro[direccion_filter] = "%"+direccion.value+"%";
-        console.log("direccion: ", filtro);
         campo.direccion = filtro;
     }
 
+    if (id_municipio.value !== "") {
+        const filtro = {};
+        filtro[id_municipio_filter] = id_municipio.value;
+        campo.id_municipio = filtro;
+    }
+
+    return campo;
+}
+
+function ObtenerMunicipios() {
+
+    const id_departamento_filter = "eq"
+    const id_departamento = document.getElementById('id_departamento');
+
+    const campo = {};
+
     const filtro = {};
     filtro[id_departamento_filter] = id_departamento.value;
-    console.log("departamento: ", filtro);
     campo.id_departamento = filtro;
 
     return campo;
