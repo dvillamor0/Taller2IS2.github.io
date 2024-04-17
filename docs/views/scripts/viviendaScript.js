@@ -1,5 +1,3 @@
-
-
 import { Vivienda, ViviendaController } from "../../src/Vivienda.js";
 import { MunicipioController } from "../../src/Municipio.js";
 import { DepartamentoController } from "../../src/Departamento.js";
@@ -22,7 +20,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-window.addEventListener('change', async () => {
+id_municipio.addEventListener('focus', async () => {
     const municipioCtrl = new MunicipioController();
     const filtro = ObtenerFiltro()
     const municipios = await municipioCtrl.leer(filtro);
@@ -45,19 +43,14 @@ function ObtenerNuevo() {
     const id_vivienda = document.getElementById('id_vivienda').value;
     const direccion = document.getElementById('direccion').value;
     const id_departamento = document.getElementById('id_departamento').value;
+    const id_municipio = document.getElementById('id_municipio').value;
 
-    if (!direccion) {
-        window.alert("Nombre requerido");
+    if (id_vivienda && id_vivienda && id_departamento && id_municipio) {
+        return new Vivienda(id_vivienda, direccion, id_municipio);
+    } else {
+        window.alert("Llene todos los campos");
         return;
     }
-
-    if (id_departamento) {
-        if (id_vivienda) {
-            return new Vivienda(id_vivienda, direccion, id_departamento);
-        }
-        return new Vivienda(id_vivienda, id_departamento);
-    }
-    return new Vivienda(id_vivienda);
 }
 
 function ObtenerFiltro() {
@@ -69,25 +62,28 @@ function ObtenerFiltro() {
     const direccion = document.getElementById('direccion_filtro');
     const id_departamento = document.getElementById('id_departamento');
 
+
     const campo = {};
 
     if (id_vivienda_filter !== "") {
         const filtro = {};
         filtro[id_vivienda_filter] = id_vivienda.value;
+        console.log("vivienda: ", filtro);
         campo.id_vivienda = filtro;
     }
 
     if (direccion_filter !== "") {
         const filtro = {};
         filtro[direccion_filter] = "%"+direccion.value+"%";
+        console.log("direccion: ", filtro);
         campo.direccion = filtro;
     }
 
-    if (id_departamento_filter !== "") {
-        const filtro = {};
-        filtro[id_departamento_filter] = id_departamento.value;
-        campo.id_departamento = filtro;
-    }
+    const filtro = {};
+    filtro[id_departamento_filter] = id_departamento.value;
+    console.log("departamento: ", filtro);
+    campo.id_departamento = filtro;
+
     return campo;
 }
 
@@ -99,7 +95,7 @@ async function crear() {
 
 async function leer() {
     const filtro = ObtenerFiltro();
-    const viviendaCtrl = new MunicipioController();
+    const viviendaCtrl = new ViviendaController();
     mostrarDatos(await viviendaCtrl.leer(filtro));
 }
 
