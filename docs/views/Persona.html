@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <script type="module" src="./scripts/viviendaScript.js"></script>
+    <script type="module" src="./scripts/personaScript.js"></script>
     <div class="container mt-5">
         <h2>CRUD Persona</h2>
         <br>
@@ -33,7 +33,7 @@
                 <label for="id_persona" class="col-sm-2 col-form-label">ID Persona:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="id_persona_filtro" name="id_persona"
-                        placeholder="ID Persona">
+                        placeholder="ID Persona a Buscar">
                     <input type="text" class="form-control" id="id_persona" name="id_persona"
                         placeholder="Nuevo ID Persona">
                 </div>
@@ -183,21 +183,12 @@
                 </div>
             </div>
             <br>
-            <!--id Cabeza de Familia-->
+            <!--id Vivienda-->
             <div class="form-group row">
                 <label for="id_vivienda" class="col-sm-2 col-form-label">Id Vivienda:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="id_vivienda_filtro" name="id_vivienda_familia"
-                        placeholder="Id vivienda a Buscar">
-                    <input type="text" class="form-control" id="id_vivienda_familia" name="id_vivienda_familia"
-                        placeholder="Id vivienda">
-                </div>
-                <div class="col-sm-2">
-                    <select id="id_vivienda_filter" name="id_vivienda_filter" class="form-control">
+                    <select id="id_vivienda" name="id_vivienda" class="form-control">
                         <option value="" selected>Ninguno</option>
-                        <option value="eq">Igual a</option>
-                        <option value="ilike">Contener (Mayúsculas y minúsculas no sensibles)</option>
-                        <option value="neq">No es igual a</option>
                     </select>
                 </div>
             </div>
