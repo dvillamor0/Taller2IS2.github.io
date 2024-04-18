@@ -11,7 +11,7 @@
 
 <body>
 
-    <script type="module" src="./scripts/municipioScript.js"></script>
+    <script type="module" src="./scripts/vivienda-propietarioScript.js"></script>
     <div class="container mt-5">
         <h2>CRUD Vivienda-Propietario</h2>
         <br>
@@ -36,6 +36,9 @@
                     <select id="id_vivienda" name="id_vivienda" class="form-control" required>
                         <option value="" selected>Seleccione el Id de Vivienda</option>
                     </select>
+                    <select id="id_vivienda_filtro" name="id_vivienda" class="form-control">
+                        <option value="" selected>Seleccione el Id de Vivienda a buscar</option>
+                    </select>
                 </div>
             </div>
             <br>
@@ -46,6 +49,9 @@
                     <select id="id_persona" name="id_persona" class="form-control" required>
                         <option value="" selected>Seleccione el Id de Persona</option>
                     </select>
+                    <select id="id_persona_filtro" name="id_persona" class="form-control">
+                        <option value="" selected>Seleccione el Id de Persona a buscar</option>
+                    </select>
                 </div>
             </div>
             <br>
@@ -53,7 +59,7 @@
             <div class="form-group row">
                 <label for="dni" class="col-sm-2 col-form-label">Porcentaje Propiedad *:</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" name="porcentaje_propiedad" min="0" max="100" required>
+                    <input id="porcentaje_propiedad" class="form-control" name="porcentaje_propiedad" min="0" max="100" required>
                 </div>
             </div>
         </form>
