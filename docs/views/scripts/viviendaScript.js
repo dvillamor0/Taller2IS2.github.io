@@ -40,15 +40,13 @@ id_departamento.addEventListener('change', function(){
 });
 
 function ObtenerNuevo() {
-    const id_vivienda = document.getElementById('id_vivienda').value;
     const direccion = document.getElementById('direccion').value;
     const id_municipio = document.getElementById('id_municipio').value;
 
     if (direccion && id_municipio) {
         const vivienda = new Vivienda(
             direccion,
-            id_municipio,
-            id_vivienda?id_vivienda:null
+            id_municipio
         );
         return vivienda;
     } else {

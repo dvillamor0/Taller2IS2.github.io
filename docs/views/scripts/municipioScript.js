@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 function ObtenerNuevo() {
-    const id_municipio = document.getElementById('id_municipio').value;
     const nombre_municipio = document.getElementById('nombre_municipio').value;
     const id_departamento = document.getElementById('id_departamento').value;
 
@@ -31,8 +30,7 @@ function ObtenerNuevo() {
     }
     const municipio = new Municipio(
         nombre_municipio,
-        id_departamento,
-        id_municipio?id_municipio:null
+        id_departamento
     );
     return municipio;
 }

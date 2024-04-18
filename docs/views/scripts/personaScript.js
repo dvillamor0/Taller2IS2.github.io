@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 function ObtenerNuevo() {
-    const id_persona = document.getElementById('id_persona').value;
     const id_tipo_documento = document.getElementById('id_tipo_documento').value;
     const dni = document.getElementById('dni').value;
     const nombre1 = document.getElementById('nombre1').value;
@@ -43,17 +42,6 @@ function ObtenerNuevo() {
     const mayor_de_edad = document.getElementById('mayor_de_edad').value;
     const id_cabeza_familia = document.getElementById('id_cabeza_familia').value;
     const id_vivienda = document.getElementById('id_vivienda').value;
-    
-    console.log(id_persona);
-    console.log(id_tipo_documento);
-    console.log(dni);
-    console.log(nombre1);
-    console.log(nombre2);
-    console.log(apellido1);
-    console.log(apellido2);
-    console.log(mayor_de_edad);
-    console.log(id_cabeza_familia);
-    console.log(id_vivienda);
     
     if (id_tipo_documento && dni && nombre1 && apellido1 && mayor_de_edad && id_vivienda) {
         const persona = new Persona(
@@ -65,8 +53,7 @@ function ObtenerNuevo() {
             mayor_de_edad,
             nombre2 ? nombre2 : null,
             apellido2 ? apellido2 : null,
-            id_cabeza_familia ? id_cabeza_familia : null,
-            id_persona ? id_persona : null
+            id_cabeza_familia ? id_cabeza_familia : null
         );
         return persona;
     } else {

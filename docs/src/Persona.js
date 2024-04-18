@@ -1,9 +1,8 @@
 import { Entidad } from "./Entidad.js";
 export class Persona {
 
-  constructor(idTipoDocumento, dni, nombre1, apellido1, idVivienda, mayor_de_edad, nombre2 = null, apellido2 = null, idJefeFamilia = null, id = null) {
+  constructor(idTipoDocumento, dni, nombre1, apellido1, idVivienda, mayor_de_edad, nombre2 = null, apellido2 = null, idJefeFamilia = null) {
 
-    id?this.id_persona = id:undefined;
     this.id_tipo_documento = idTipoDocumento;
     this.dni = dni;
     this.nombre1 = nombre1;
