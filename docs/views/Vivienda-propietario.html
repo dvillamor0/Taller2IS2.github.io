@@ -31,9 +31,9 @@
         <form id="viviendaForm">
             <!--Id Vivienda-->
             <div class="form-group row">
-                <label for="id_vivienda" class="col-sm-2 col-form-label">Id Vivienda:</label>
+                <label for="id_vivienda" class="col-sm-2 col-form-label">Id Vivienda *:</label>
                 <div class="col-sm-4">
-                    <select id="id_vivienda" name="id_vivienda" class="form-control">
+                    <select id="id_vivienda" name="id_vivienda" class="form-control" required>
                         <option value="" selected>Seleccione el Id de Vivienda</option>
                     </select>
                 </div>
@@ -41,9 +41,9 @@
             <br>
             <!--Id Persona-->
             <div class="form-group row">
-                <label for="id_persona" class="col-sm-2 col-form-label">Id Vivienda:</label>
+                <label for="id_persona" class="col-sm-2 col-form-label">Id Persona *:</label>
                 <div class="col-sm-4">
-                    <select id="id_persona" name="id_persona" class="form-control">
+                    <select id="id_persona" name="id_persona" class="form-control" required>
                         <option value="" selected>Seleccione el Id de Persona</option>
                     </select>
                 </div>
@@ -51,9 +51,9 @@
             <br>
             <!--Porcentaje Propiedad-->
             <div class="form-group row">
-                <label for="dni" class="col-sm-2 col-form-label">Porcentaje Propiedad:</label>
+                <label for="dni" class="col-sm-2 col-form-label">Porcentaje Propiedad *:</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" name="porcentaje_propiedad" min="0" max="100">
+                    <input type="number" class="form-control" name="porcentaje_propiedad" min="0" max="100" required>
                 </div>
             </div>
         </form>
