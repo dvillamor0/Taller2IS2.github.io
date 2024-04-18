@@ -106,7 +106,7 @@ function ObtenerFiltro() {
         campo.id_persona= filtro;
     }
 
-    if (id_tipo_documento_filter!== "") {
+    if (id_tipo_documento.value!== "") {
         const filtro = {};
         filtro[id_tipo_documento_filter] = id_tipo_documento.value;
         campo.id_tipo_documento = filtro;
@@ -142,7 +142,7 @@ function ObtenerFiltro() {
         campo.apellido2 = filtro;
     }
     
-    if (mayor_de_edad_filter!== "") {
+    if (mayor_de_edad.value!== "") {
         const filtro = {};
         filtro[mayor_de_edad_filter] = mayor_de_edad.value;
         campo.mayor_de_edad = filtro;
@@ -154,7 +154,7 @@ function ObtenerFiltro() {
         campo.id_cabeza_familia = filtro;
     }
     
-    if (id_vivienda_filter!== "") {
+    if (id_vivienda.value!== "") {
         const filtro = {};
         filtro[id_vivienda_filter] = id_vivienda.value;
         campo.id_vivienda = filtro;

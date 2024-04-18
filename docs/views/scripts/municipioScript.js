@@ -60,7 +60,7 @@ function ObtenerFiltro() {
         campo.nombre_municipio = filtro;
     }
 
-    if (id_departamento_filter !== "") {
+    if (id_departamento.value !== "") {
         const filtro = {};
         filtro[id_departamento_filter] = id_departamento.value;
         campo.id_departamento = filtro;
