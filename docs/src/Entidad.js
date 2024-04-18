@@ -24,7 +24,9 @@ export class Entidad {
             console.log(this._entidad + ' creado:', created);
             return created;
         } catch (error) {
-            window.alert('Error al crear ' + this._entidad + ':', error.response.data.message);
+            console.error("Crear",error);
+            const mensaje = await error.response.data.message;
+            window.alert('Error al crear ' + this._entidad + ':'+ mensaje);
         }
     }
     async leer(filter) {
@@ -33,7 +35,9 @@ export class Entidad {
             console.log(this._entidad + ' leídos:', entidades);
             return entidades;
         } catch (error) {
-            window.alert('Error al leer ' + this._entidad + ':', error.response.data.message);
+            console.error("Leer",error);
+            const mensaje = await error.response.data.message;
+            window.alert('Error al leer ' + this._entidad + ':'+ mensaje);
         }
     }
     async actualizar(filter) {
@@ -42,7 +46,9 @@ export class Entidad {
             console.log(this._entidad + ' actualizado:', updated);
             return updated;
         } catch (error) {
-            window.alert('Error al actualizar ' + this._entidad + ':', error.response.data.message);
+            console.error("Actualizar",error);
+            const mensaje = await error.response.data.message;
+            window.alert('Error al actualizar ' + this._entidad + ':'+ mensaje);
         }
     }
     async eliminar(filter) {
@@ -52,7 +58,9 @@ export class Entidad {
                 await supabase.delete(this._entidad, filter);
                 window.alert(this._entidad + ' eliminado con criterios: ' + JSON.stringify(filter));
             } catch (error) {
-                window.alert('Error al eliminar' + this._entidad + ':', error.response.data.message);
+                console.error("Eliminar",error);
+                const mensaje = await error.response.data.message;
+                window.alert('Error al eliminar' + this._entidad + ':'+ mensaje);
             }
         }
     }
