@@ -73,7 +73,7 @@ function ObtenerFiltro() {
 
     if (id_persona.value !== "") {
         const filtro = {};
-        filtro[id_persona_filter] = "%"+id_persona.value+"%";
+        filtro[id_persona_filter] = id_persona.value;
         campo.id_persona = filtro;
     }
     return campo;
