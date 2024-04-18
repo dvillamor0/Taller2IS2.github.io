@@ -9,7 +9,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     const departamentoCtrl = new DepartamentoController();
     const departamentos = await departamentoCtrl.leer();
     const selectDepartamento = document.getElementById('id_departamento');
-    const selectMunicipio = document.getElementById('id_municipio');
 
     departamentos.forEach(departamento => {
         const option = document.createElement('option');
