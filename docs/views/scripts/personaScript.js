@@ -144,7 +144,7 @@ function ObtenerFiltro() {
     if (id_vivienda.value!== "") {
         const filtro = {};
         filtro[id_vivienda_filter] = id_vivienda.value;
-        campo.id_vivienda = filtro;
+        campo.id_recidencia = filtro;
     }
 
     return campo;
