@@ -62,6 +62,8 @@ function ObtenerNuevo() {
 function ObtenerFiltro() {
     const id_vivienda = document.getElementById('id_vivienda_filtro');
     const id_persona = document.getElementById('id_persona_filtro');
+    id_vivienda_filter = "eq";
+    id_persona_filter = "eq";
 
     const campo = {};
 
