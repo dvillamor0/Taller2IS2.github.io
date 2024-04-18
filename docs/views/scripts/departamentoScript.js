@@ -11,14 +11,12 @@ function ObtenerNuevo() {
         window.alert("nombre requerido");
         return;
     }
-
-    if (id_gobernador) {
-        if (id_departamento) {
-            return new Departamento(nombre_departamento, id_gobernador, id_departamento);
-        }
-        return new Departamento(nombre_departamento, id_gobernador);
-    }
-    return new Departamento(nombre_departamento);
+    const departamento = new Departamento(
+        nombre_departamento,
+        id_gobernador?id_gobernador:null,
+        id_departamento?id_departamento:null
+    );
+    return departamento;
 }
 
 function ObtenerFiltro() {

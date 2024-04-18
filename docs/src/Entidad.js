@@ -38,6 +38,7 @@ export class Entidad {
     }
     async actualizar(filter) {
         try {
+            console.log("PPPPPPPPPPPPP filtro objeto",filter,this.objeto);
             const updated = await supabase.update(this._entidad, filter, this.objeto);
             console.log(this._entidad + ' actualizado:', updated);
             return updated;

@@ -2,10 +2,11 @@ import { Entidad } from "./Entidad.js";
 
 export class Departamento{
   constructor(nombre,idGobernador=null,id=null){
-    this.id_departamento = id;
+    id?this.id_departamento = id:undefined;
     this.nombre_departamento=nombre;
-    _verificarGobernador(idGobernador);
-    this.id_gobernador=idGobernador;
+    this._verificarGobernador(idGobernador);
+    idGobernador?this.id_gobernador=idGobernador:undefined;
+    
   }
 
   _verificarGobernador(idGobernador){

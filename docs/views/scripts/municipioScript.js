@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 function ObtenerNuevo() {
-    const id_municipio = document.getElementById('id_municipio').value;
     const nombre_municipio = document.getElementById('nombre_municipio').value;
     const id_departamento = document.getElementById('id_departamento').value;
 
@@ -29,20 +28,17 @@ function ObtenerNuevo() {
         window.alert("Nombre requerido");
         return;
     }
-
-    if (id_departamento) {
-        if (id_municipio) {
-            return new Municipio(nombre_municipio, id_departamento, id_municipio);
-        }
-        return new Municipio(nombre_municipio, id_departamento);
-    }
-    return new Municipio(nombre_municipio);
+    const municipio = new Municipio(
+        nombre_municipio,
+        id_departamento
+    );
+    return municipio;
 }
 
 function ObtenerFiltro() {
     const id_municipio_filter = document.getElementById('id_municipio_filter').value;
     const nombre_municipio_filter = document.getElementById('nombre_municipio_filter').value;
-    const id_departamento_filter = document.getElementById('id_departamento_filter').value;
+    const id_departamento_filter = "eq"
 
     const id_municipio = document.getElementById('id_municipio_filtro');
     const nombre_municipio = document.getElementById('nombre_municipio_filtro');
@@ -62,7 +58,7 @@ function ObtenerFiltro() {
         campo.nombre_municipio = filtro;
     }
 
-    if (id_departamento_filter !== "") {
+    if (id_departamento.value !== "") {
         const filtro = {};
         filtro[id_departamento_filter] = id_departamento.value;
         campo.id_departamento = filtro;
