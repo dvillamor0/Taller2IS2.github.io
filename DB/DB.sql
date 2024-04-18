@@ -47,7 +47,7 @@ CREATE TABLE Persona (
 ALTER TABLE Persona
 ADD CONSTRAINT chk_tipo_documento_mayor_de_edad
 CHECK (
-    (id_tipo_documento = 1 AND mayor_de_edad = TRUE)
+    (id_tipo_documento = 1 AND mayor_de_edad = TRUE) OR (id_tipo_documento <> 1)
 );
 
 -- Añade el Gobernador
@@ -72,23 +72,48 @@ CREATE TABLE Vivienda_Propietario (
 ALTER TABLE Persona
 ADD CONSTRAINT chk_gobernador_tipo_documento CHECK (id_tipo_documento = 1);
 
--- Agregar restricción CHECK para asegurar que el cabeza de familia sea mayor de edad
-ALTER TABLE Persona
-ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad CHECK (mayor_de_edad = TRUE);
+-- Crear la función
+CREATE OR REPLACE FUNCTION es_mayor_de_edad(id_persona_check INT) RETURNS BOOLEAN AS $$
+DECLARE
+    edad_persona BOOLEAN;
+BEGIN
+    SELECT mayor_de_edad INTO edad_persona
+    FROM Persona
+    WHERE id_persona = id_persona_check;
+    
+    RETURN edad_persona;
+END;
+$$ LANGUAGE plpgsql;
 
--- Agregar la restricción para que un gobernador tenga en el municipio del departamento gobernado
+-- Agregar restricción CHECK utilizando la función
+ALTER TABLE Persona
+ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad 
+CHECK (
+    (id_cabeza_familia IS NULL AND mayor_de_edad = TRUE) OR
+    (id_cabeza_familia IS NOT NULL AND es_mayor_de_edad(id_cabeza_familia) = TRUE)
+);
+
+-- Agregar la restricción para que un gobernador resida en el municipio del departamento que gobierna y tenga C.C
 CREATE OR REPLACE FUNCTION validate_gobernador_residence()
 RETURNS TRIGGER AS $$
+DECLARE
+    id_departamento_gobernador INT;
+    tipo_documento_gobernador INT;
 BEGIN
     IF NEW.id_gobernador IS NOT NULL THEN
-        SELECT d.id_departamento INTO NEW.id_departamento_gobernador
+        SELECT d.id_departamento, p.id_tipo_documento
+        INTO id_departamento_gobernador, tipo_documento_gobernador
         FROM Persona p
         JOIN Vivienda v ON v.id_vivienda = p.id_recidencia
         JOIN Municipio m ON m.id_municipio = v.id_municipio
         JOIN Departamento d ON d.id_departamento = m.id_departamento
-        WHERE p.id = NEW.id_gobernador;
+        WHERE p.id_persona = NEW.id_gobernador;
 
-        IF NEW.id_departamento <> NEW.id_departamento_gobernador THEN
+        IF tipo_documento_gobernador <> 1 THEN
+            RAISE EXCEPTION 'El gobernador no tiene C.C';
+        END IF;
+
+        IF NEW.id_departamento <> id_departamento_gobernador THEN
             RAISE EXCEPTION 'El gobernador no reside en el municipio del departamento que gobierna.';
         END IF;
     END IF;
