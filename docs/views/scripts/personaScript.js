@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     tipodocumento.forEach(tipo => {
         const option = document.createElement('option');
         option.value = tipo.id_tipo_documento;
-        option.textContent = tipo.id_tipo_documento;
+        option.textContent = tipo.nombre_tipo_documento;
         selectTipoDocumento.appendChild(option);
     });
 
@@ -55,10 +55,22 @@ function ObtenerNuevo() {
     console.log(id_cabeza_familia);
     console.log(id_vivienda);
     
-    if (id_persona && id_tipo_documento && dni && nombre1 && apellido1 && mayor_de_edad && id_vivienda) {
-        return new Persona(id_tipo_documento, dni, nombre1, apellido1, id_vivienda, mayor_de_edad, nombre2, apellido2, id_cabeza_familia, id_persona);
+    if (id_tipo_documento && dni && nombre1 && apellido1 && mayor_de_edad && id_vivienda) {
+        const persona = new Persona(
+            id_tipo_documento,
+            dni,
+            nombre1,
+            apellido1,
+            id_vivienda,
+            mayor_de_edad,
+            nombre2 ? nombre2 : null,
+            apellido2 ? apellido2 : null,
+            id_cabeza_familia ? id_cabeza_familia : null,
+            id_persona ? id_persona : null
+        );
+        return persona;
     } else {
-        window.alert("Llene todos los campos");
+        window.alert("Llene todos los campos requeridos");
         return;
     }
 }

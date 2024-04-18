@@ -29,14 +29,12 @@ function ObtenerNuevo() {
         window.alert("Nombre requerido");
         return;
     }
-
-    if (id_departamento) {
-        if (id_municipio) {
-            return new Municipio(nombre_municipio, id_departamento, id_municipio);
-        }
-        return new Municipio(nombre_municipio, id_departamento);
-    }
-    return new Municipio(nombre_municipio);
+    const municipio = new Municipio(
+        nombre_municipio,
+        id_departamento,
+        id_municipio?id_municipio:null
+    );
+    return municipio;
 }
 
 function ObtenerFiltro() {

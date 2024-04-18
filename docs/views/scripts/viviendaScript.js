@@ -44,10 +44,15 @@ function ObtenerNuevo() {
     const direccion = document.getElementById('direccion').value;
     const id_municipio = document.getElementById('id_municipio').value;
 
-    if (id_vivienda && id_vivienda && id_municipio) {
-        return new Vivienda(id_vivienda, direccion, id_municipio);
+    if (direccion && id_municipio) {
+        const vivienda = new Vivienda(
+            direccion,
+            id_municipio,
+            id_vivienda?id_vivienda:null
+        );
+        return vivienda;
     } else {
-        window.alert("Llene todos los campos");
+        window.alert("Llene todos los campos requeridos");
         return;
     }
 }
