@@ -72,9 +72,26 @@ CREATE TABLE Vivienda_Propietario (
 ALTER TABLE Persona
 ADD CONSTRAINT chk_gobernador_tipo_documento CHECK (id_tipo_documento = 1);
 
--- Agregar restricción CHECK para asegurar que el cabeza de familia sea mayor de edad
+-- Crear la función
+CREATE OR REPLACE FUNCTION es_mayor_de_edad(id_persona_check INT) RETURNS BOOLEAN AS $$
+DECLARE
+    edad_persona BOOLEAN;
+BEGIN
+    SELECT mayor_de_edad INTO edad_persona
+    FROM Persona
+    WHERE id_persona = id_persona_check;
+    
+    RETURN edad_persona;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Agregar restricción CHECK utilizando la función
 ALTER TABLE Persona
-ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad CHECK (mayor_de_edad = TRUE);
+ADD CONSTRAINT chk_cabeza_familia_mayor_de_edad 
+CHECK (
+    (id_cabeza_familia IS NULL AND mayor_de_edad = TRUE) OR
+    (id_cabeza_familia IS NOT NULL AND es_mayor_de_edad(id_cabeza_familia) = TRUE)
+);
 
 -- Agregar la restricción para que un gobernador tenga en el municipio del departamento gobernado
 CREATE OR REPLACE FUNCTION validate_gobernador_residence()

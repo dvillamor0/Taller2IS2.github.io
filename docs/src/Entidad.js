@@ -24,7 +24,7 @@ export class Entidad {
             console.log(this._entidad + ' creado:', created);
             return created;
         } catch (error) {
-            console.error('Error al crear ' + this._entidad + ':', error);
+            window.alert('Error al crear ' + this._entidad + ':', error.response.data.message);
         }
     }
     async leer(filter) {
@@ -33,17 +33,16 @@ export class Entidad {
             console.log(this._entidad + ' leídos:', entidades);
             return entidades;
         } catch (error) {
-            console.error('Error al leer ' + this._entidad + ':', error);
+            window.alert('Error al leer ' + this._entidad + ':', error.response.data.message);
         }
     }
     async actualizar(filter) {
         try {
-            console.log("PPPPPPPPPPPPP filtro objeto",filter,this.objeto);
             const updated = await supabase.update(this._entidad, filter, this.objeto);
             console.log(this._entidad + ' actualizado:', updated);
             return updated;
         } catch (error) {
-            console.error('Error al actualizar ' + this._entidad + ':', error);
+            window.alert('Error al actualizar ' + this._entidad + ':', error.response.data.message);
         }
     }
     async eliminar(filter) {
@@ -53,7 +52,7 @@ export class Entidad {
                 await supabase.delete(this._entidad, filter);
                 window.alert(this._entidad + ' eliminado con criterios: ' + JSON.stringify(filter));
             } catch (error) {
-                console.error('Error al eliminar' + this._entidad + ':', error);
+                window.alert('Error al eliminar' + this._entidad + ':', error.response.data.message);
             }
         }
     }

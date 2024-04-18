@@ -43,7 +43,7 @@ function ObtenerNuevo() {
     const id_cabeza_familia = document.getElementById('id_cabeza_familia').value;
     const id_vivienda = document.getElementById('id_vivienda').value;
     
-    if (id_tipo_documento && dni && nombre1 && apellido1 && mayor_de_edad && id_vivienda) {
+    if (id_tipo_documento && dni && nombre1 && apellido1 && (mayor_de_edad != null) && id_vivienda) {
         const persona = new Persona(
             id_tipo_documento,
             dni,
