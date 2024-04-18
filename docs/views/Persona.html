@@ -47,9 +47,9 @@
             <br>
             <!--Tipo de Documento-->
             <div class="form-group row">
-                <label for="id_tipo_documento" class="col-sm-2 col-form-label">Tipo de Documento:</label>
+                <label for="id_tipo_documento" class="col-sm-2 col-form-label">Tipo de Documento: *</label>
                 <div class="col-sm-4">
-                    <select id="id_tipo_documento" name="id_tipo_documento" class="form-control">
+                    <select id="id_tipo_documento" name="id_tipo_documento" class="form-control" required>
                         <option value="" selected>Seleccione el tipo de documento</option>
                     </select>
                 </div>
@@ -57,11 +57,11 @@
             <br>
             <!--DNI-->
             <div class="form-group row">
-                <label for="dni" class="col-sm-2 col-form-label">DNI:</label>
+                <label for="dni" class="col-sm-2 col-form-label">DNI *:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="dni_filtro" name="dni"
                         placeholder="Ingrese el Documento a Buscar">
-                    <input type="text" class="form-control" id="dni" name="dni"
+                    <input type="text" class="form-control" id="dni" name="dni" required
                         placeholder="Ingrese su Documento">
                 </div>
                 <div class="col-sm-2">
@@ -76,11 +76,11 @@
             <br>
             <!--Nombre1-->
             <div class="form-group row">
-                <label for="nombre1" class="col-sm-2 col-form-label">Nombre 1:</label>
+                <label for="nombre1" class="col-sm-2 col-form-label">Nombre 1 *:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="nombre1_filtro" name="nombre1"
                         placeholder="Ingrese el Nombre a Buscar">
-                    <input type="text" class="form-control" id="nombre1" name="nombre1"
+                    <input type="text" class="form-control" id="nombre1" name="nombre1" required
                         placeholder="Ingrese un Nombre">
                 </div>
                 <div class="col-sm-2">
@@ -114,11 +114,11 @@
             <br>
             <!--Apellido 1-->
             <div class="form-group row">
-                <label for="apellido1" class="col-sm-2 col-form-label">Apellido 1:</label>
+                <label for="apellido1" class="col-sm-2 col-form-label">Apellido 1 *:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="apellido1_filtro" name="apellido1"
                         placeholder="Ingrese el Apellido a Buscar">
-                    <input type="text" class="form-control" id="apellido1" name="apellido1"
+                    <input type="text" class="form-control" id="apellido1" name="apellido1" required
                         placeholder="Ingrese un Apellido">
                 </div>
                 <div class="col-sm-2">
@@ -152,9 +152,9 @@
             <br>
             <!--Mayor de Edad-->
             <div class="form-group row">
-                <label for="mayor_de_edad" class="col-sm-2 col-form-label">Mayor de Edad:</label>
+                <label for="mayor_de_edad" class="col-sm-2 col-form-label">Mayor de Edad *:</label>
                 <div class="col-sm-4">
-                    <select id="mayor_de_edad" name="mayor_de_edad" class="form-control">
+                    <select id="mayor_de_edad" name="mayor_de_edad" class="form-control" required>
                         <option value="" selected>Seleccione Si/No</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
@@ -183,9 +183,9 @@
             <br>
             <!--id Vivienda-->
             <div class="form-group row">
-                <label for="id_vivienda" class="col-sm-2 col-form-label">Id Vivienda:</label>
+                <label for="id_vivienda" class="col-sm-2 col-form-label">Id Vivienda *:</label>
                 <div class="col-sm-4">
-                    <select id="id_vivienda" name="id_vivienda" class="form-control">
+                    <select id="id_vivienda" name="id_vivienda" class="form-control" required>
                         <option value="" selected>Ninguno</option>
                     </select>
                 </div>
